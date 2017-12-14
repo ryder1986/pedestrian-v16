@@ -30,7 +30,7 @@ public:
         PATH_LENGTH=200,
         BUF_LENGTH=200,
         BUF_MAX_LENGTH=2000
-      };
+    };
     static mutex lock;
 private:
     int cc=0;
@@ -46,26 +46,26 @@ public:
     }
     inline static string last_substr(string str,char split_ch)
     {
-         char tmp[BUF_MAX_LENGTH];
-         memset(tmp,0,BUF_MAX_LENGTH);
-         strcpy(tmp,str.data());
-         char *p=tmp;
-         int total=0;
-         char *p1=p;
+        char tmp[BUF_MAX_LENGTH];
+        memset(tmp,0,BUF_MAX_LENGTH);
+        strcpy(tmp,str.data());
+        char *p=tmp;
+        int total=0;
+        char *p1=p;
         while(0!=*(++p)){
-          if(*p==split_ch){
-              p1=p+1;
-              total++;
-          }
+            if(*p==split_ch){
+                p1=p+1;
+                total++;
+            }
         }
 
-            return string(p1);
+        return string(p1);
 
-//           int total=0;
-//           iterator <std::basic_string>it=str.begin();
-//           while(it!=str.end()){
-//               it++;
-//           }
+        //           int total=0;
+        //           iterator <std::basic_string>it=str.begin();
+        //           while(it!=str.end()){
+        //               it++;
+        //           }
     }
 
     inline static void prt(const char *buf,const int line_no,const char *func_name,const char *file_name,const char *label,const char *time)
@@ -78,13 +78,17 @@ public:
             ;
         buffer[i]='\0';
 
-     //   cout<<"("<<buf<<")"<<'['<<line_no<<']'<<'['<<func_name<<']'<<'['<<file_name<<']'<<'['<<buffer<<']'<<'['<<label<<']'<<endl;
-      //  cout<<"("<<buf<<")"<<'['<<line_no<<']'<<'['<<func_name<<']'<<'['<<file_name<<']'<<'['<<buffer<<']'<<'['<<label<<']'<<endl;
+        //   cout<<"("<<buf<<")"<<'['<<line_no<<']'<<'['<<func_name<<']'<<'['<<file_name<<']'<<'['<<buffer<<']'<<'['<<label<<']'<<endl;
+        //  cout<<"("<<buf<<")"<<'['<<line_no<<']'<<'['<<func_name<<']'<<'['<<file_name<<']'<<'['<<buffer<<']'<<'['<<label<<']'<<endl;
 
 
         string fn(file_name);
-
-        cout<<last_substr(fn,'/').data()<<"(line"<<line_no<<")"<<":"<<buf<<endl;
+#ifdef  IS_UNIX
+        char t='/';
+#else
+        char t='\\';
+#endif
+        cout<<last_substr(fn,t).data()<<"(line"<<line_no<<")"<<":"<<buf<<endl;
     }
     inline static char* get_time()
     {
@@ -336,9 +340,9 @@ public:
             }
             //   prt(info,"runing timer");
             if(p_d->dt==NULL)
-            p_d->timer_func();
+                p_d->timer_func();
             else
-                  p_d->timer_func1(p_d->dt);
+                p_d->timer_func1(p_d->dt);
             this_thread::sleep_for(chrono::milliseconds(p_d->duration));
         }
     }

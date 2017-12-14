@@ -22,6 +22,7 @@ QT+=network core
 
 
 unix{
+DEFINES += IS_UNIX
 QMAKE_CXXFLAGS+="-std=c++11"
 INCLUDEPATH +="$$CVPATH/cv/opencv-249-linux32/include"
 LIBS+=-L$$CVPATH/cv/opencv-249-linux32/lib -lopencv_core -lopencv_highgui -lopencv_objdetect -lopencv_imgproc -lopencv_ml -lopencv_video -lX11
@@ -60,6 +61,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 
- #   DEFINES += IS_UNIX
+
  #DEFINES += DISPLAY_VIDEO
 
