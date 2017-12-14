@@ -47,22 +47,18 @@ FORMS += \
 #QMAKE_LIBDIR+="C:/Users/root/Desktop/opencv-2.4.9/opencv/build/x64/vc12/lib/"
 #DEPENDPATH+="C:/Users/root/Desktop/opencv-2.4.9/opencv/build/x64/vc12/bin/"
 
-INCLUDEPATH +="$$CVPATH/include"
 win32{
-LIBS+=-L$$CVPATH/lib -lopencv_core249 -lopencv_highgui249 -lopencv_objdetect249 -lopencv_imgproc249 -lopencv_ml249 -lopencv_video249
+INCLUDEPATH +="$$CVPATH\cv\opencv-vs2013-x86\include"
+CONFIG(release, debug|release){
+LIBS+=-L$$CVPATH\cv\opencv-vs2013-x86\include -lopencv_core249 -lopencv_highgui249 -lopencv_objdetect249 -lopencv_imgproc249 -lopencv_ml249 -lopencv_video249
+}else{
+
+LIBS+=-L$$CVPATH\cv\opencv-vs2013-x86\lib -lopencv_core249d -lopencv_highgui249d -lopencv_objdetect249d -lopencv_imgproc249d -lopencv_ml249d -lopencv_video249d
+}
 }
 unix{
-#INCLUDEPATH +=/root/bk/opencv-2-4-9-source/build/__install/include
-#LIBS+=-L/root/bk/opencv-2-4-9-source/build/__install/lib -lopencv_core  -lopencv_highgui  -lopencv_objdetect -lopencv_imgproc -lopencv_ml -lopencv_video
-#LIBS+=-lopencv_core  -lopencv_highgui  -lopencv_objdetect -lopencv_imgproc -lopencv_ml -lopencv_video
-#INCLUDEPATH+=/root/sources/opencv-2.4.9/build/__install/include
-#LIBS += -L/root/sources/opencv-2.4.9/build/__install/lib  -lopencv_core  -lopencv_highgui  -lopencv_objdetect -lopencv_imgproc -lopencv_ml -lopencv_video
-#QMAKE_LFLAGS+="-Wl,--rpath=/root/sources/opencv-2.4.9/build/__install/lib/"
-#QMAKE_CXXFLAGS +="-w"
-
-
-LIBS+=-L$$CVPATH/lib -lopencv_core -lopencv_highgui -lopencv_objdetect -lopencv_imgproc -lopencv_ml -lopencv_video -lX11
-
-
+QMAKE_CXXFLAGS+="-std=c++11"
+INCLUDEPATH +="$$CVPATH/cv/opencv-249-linux32/include"
+LIBS+=-L$$CVPATH/cv/opencv-249-linux32/lib -lopencv_core -lopencv_highgui -lopencv_objdetect -lopencv_imgproc -lopencv_ml -lopencv_video -lX11
 }
 DEFINES+=CLIENT

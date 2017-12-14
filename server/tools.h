@@ -46,8 +46,8 @@ public:
     }
     inline static string last_substr(string str,char split_ch)
     {
-         char tmp[100];
-         memset(tmp,0,100);
+         char tmp[BUF_MAX_LENGTH];
+         memset(tmp,0,BUF_MAX_LENGTH);
          strcpy(tmp,str.data());
          char *p=tmp;
          int total=0;
