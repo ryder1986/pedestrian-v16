@@ -9,17 +9,7 @@
 #include <mutex>
 #include <thread>
 #include <bitset>
-//#include <QtCore>
-//#include <QUdpSocket>
-//#include <QNetworkInterface>
 #include <list>
-
-//class Tools
-//{
-//public:
-//    Tools();
-//};
-
 using namespace std;
 #include <iterator>
 class Tools
@@ -34,11 +24,8 @@ public:
     static mutex lock;
 private:
     int cc=0;
-
     static  char filename[FIXED_VALUE::PATH_LENGTH];
     const int static buf_size=200;
-
-
 public:
 
     Tools()
@@ -58,14 +45,7 @@ public:
                 total++;
             }
         }
-
         return string(p1);
-
-        //           int total=0;
-        //           iterator <std::basic_string>it=str.begin();
-        //           while(it!=str.end()){
-        //               it++;
-        //           }
     }
 
     inline static void prt(const char *buf,const int line_no,const char *func_name,const char *file_name,const char *label,const char *time)
@@ -81,14 +61,16 @@ public:
         //   cout<<"("<<buf<<")"<<'['<<line_no<<']'<<'['<<func_name<<']'<<'['<<file_name<<']'<<'['<<buffer<<']'<<'['<<label<<']'<<endl;
         //  cout<<"("<<buf<<")"<<'['<<line_no<<']'<<'['<<func_name<<']'<<'['<<file_name<<']'<<'['<<buffer<<']'<<'['<<label<<']'<<endl;
 
-
         string fn(file_name);
+#if 0
 #ifdef  IS_UNIX
         char t='/';
 #else
         char t='\\';
 #endif
         cout<<last_substr(fn,t).data()<<"(line"<<line_no<<")"<<":"<<buf<<endl;
+#endif
+        cout<<last_substr(last_substr(fn,'/'),'\\').data()<<"(line"<<line_no<<")"<<":"<<buf<<endl;
     }
     inline static char* get_time()
     {
@@ -211,29 +193,6 @@ public :
         short *p_op=( short *)dst;
         return *p_op;
     }
-
-    //    static int pkg_get_len(QByteArray &ba)
-    //    {
-    //              return 0;
-    //    }
-    //    static void pkg_set_version(QByteArray &ba)
-    //    {
-
-    //    }
-    //    static int pkg_get_version(QByteArray &ba)
-    //    {
-    //              return ba;
-    //    }
-    //    static void pkg_set_op(QByteArray &ba)
-    //    {
-
-    //    }
-    //    static int pkg_get_get(QByteArray &ba)
-    //    {
-    //              return ba;
-    //    }
-
-
 
     static int encode_configuration_request(char *buf){
         //   pkg_set_len(ba);
